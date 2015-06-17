@@ -16,9 +16,34 @@
 </p>
 
 <p>
-  <strong>User:</strong>
-  <%= @order.user %>
+  <strong>Customer email:</strong>
+  <%= @order.user.email %>
 </p>
+
+<h1>Order Number</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Product</th>
+      <th>Quantity</th>
+      <th>Unit Price</th>
+      <th>Total Price</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @order.line_items.each do |item| %>
+      <tr>
+        <td><%= item.product.name %></td>
+        <td><%= item.quantity %></td>
+        <td><%= number_to_currency item.product.price %></td>
+        <td><%= number_to_currency item.total_price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
 
 <%= link_to 'Edit', edit_order_path(@order) %> |
 <%= link_to 'Back', orders_path %>
